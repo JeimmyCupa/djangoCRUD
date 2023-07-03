@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Mis tareas</h1>
+
+            <ul class="list-group">
+                {% for task in tasks%}
+                <!--La vista de task_detail recibe como parametro el id del objeto-->
+                <a href="{% url 'task_detail' task.id %}">
+                    <li class="list-group-item">
+                        {% if task.important%}
+                        
+                        <strong>
+                            <h1 class= "fw-bold">{{task.title}}</h1>
+                        </strong>
+                        {% else %}
+                        <h1 class= "fw-bold">{{task.title}}</h1>
+                        {% endif %}
+                        <p>{{task.description}}</p>
+                        <p>{{task.user}}</p>
+            
+                        <p>{{task.datecompleted | date:"M j Y:i "}}</p>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+            
+             
+        </div>
+    </div>
+</main>
+{% endblock content %}
